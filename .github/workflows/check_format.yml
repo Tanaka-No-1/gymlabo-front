@@ -15,10 +15,10 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install
+          yarn install
       - name: Run prettier
         run: |
-          npx prettier --check .
+          yarn prettier --check .
       - name: Run eslint
         run: |
-          npx eslint --ext '.js,.ts' .
+          yarn eslint --ext '.js,.ts' .
