@@ -1,13 +1,11 @@
 # GYMLABO Front
 
-- プロジェクトについて: [go to wiki](https://github.com/Tanaka-No-1/gymlabo-front/wiki)
-- プロジェクトのタスク管理: [go to project](https://github.com/orgs/Tanaka-No-1/projects/1)
-
 プロジェクト概要をここに記入
 
 ## 開発資料
 
-開発資料のリンクがあればここに記入
+- プロジェクトについて: [go to wiki](https://github.com/Tanaka-No-1/gymlabo-front/wiki)
+- プロジェクトのタスク管理: [go to project](https://github.com/orgs/Tanaka-No-1/projects/1)
 
 ## セットアップ
 
