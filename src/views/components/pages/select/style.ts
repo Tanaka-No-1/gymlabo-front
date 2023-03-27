@@ -12,7 +12,8 @@ export const SelectListContainer = css`
   padding: 30px 40px 30px 46px;
   border-radius: 30px 30px 0 30px;
   border: 2px solid ${Palette.YELLOW.deep};
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
+  max-width: 1100px;
 `
 
 export const SelectListWrapper = css`
