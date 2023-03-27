@@ -5,7 +5,7 @@ export const GenreContainer = css`
   display: flex;
   padding: 20px 0;
   border-bottom: 4px solid ${Palette.YELLOW.deep};
-  &:last-child {
+  &:last-of-type {
     border-bottom: none;
   }
 `
