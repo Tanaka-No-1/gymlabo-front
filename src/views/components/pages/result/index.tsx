@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import CustomButton from '../../base/customButton'
+import ErrorModal from '../../base/errorModal'
 import ModalOverlay from '../../base/modalOverlay'
 import CommentBubble from '../../ui/commentBubble'
 import CommentChatBubble from '../../ui/commentChatBubble'
@@ -9,6 +10,7 @@ import {
   ButtonContainer,
   ButtonWrapper,
   Container,
+  LoadingText,
   ModalBox,
   ModalContentContainer,
   ModalHeaderWrapper,
@@ -92,7 +94,10 @@ npm run dev
 
 const ResultPage = () => {
   const [resultChatMessage, setResultChatMessage] = useState<string[]>([])
+
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [isOpenError, setIsOpenError] = useState<boolean>(false)
+  const [isOpenReadme, setIsOpenReadme] = useState<boolean>(false)
   const [copiedButton, setCopiedButton] = useState<boolean>(false)
   const [selectedIdea, setSelectedIdea] = useState<string>('')
   const [resultReadme, setResultReadMe] = useState<string>('')
@@ -101,17 +106,18 @@ const ResultPage = () => {
 
   useEffect(() => {
     // Recoil上からアイデア一覧データを取得
-    setResultChatMessage(ideaList)
+    if (ideaList.length === 0) {
+      router.push('/')
+    } else {
+      setResultChatMessage(ideaList)
+    }
   }, [ideaList])
-
-  useEffect(() => {
-    setResultReadMe(dummyReadme)
-  })
 
   const router = useRouter()
 
   const ModalCloseButtonHandler = () => {
     setIsOpenModal(false)
+    setIsOpenReadme(false)
     setCopiedButton(false)
     setSelectedIdea('')
     setResultReadMe('')
@@ -128,48 +134,75 @@ const ResultPage = () => {
     router.push('/')
   }
 
-  const SelectIdeaButtonHandler = (idea: string) => {
-    // リクエストを投げる
-    // モーダルを表示(ローディング中)
-    // リクエスト成功：モーダルを取得データに変更
-    // リクエスト失敗：モーダル上でエラー表示・ボタンを押して再度選択
+  // 待機検証用
+  const sleep = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms))
 
+  const SelectIdeaButtonHandler = async (idea: string) => {
     setSelectedIdea(idea)
+    // モーダルを表示(ローディング中)
     setIsOpenModal(true)
+
+    // リクエストを投げる
+    console.log(selectedIdea)
+    await sleep(5000)
+
+    // リクエスト成功：モーダルを取得データに変更
+    // setResultReadMe(dummyReadme)
+    // setIsOpenReadme(true)
+
+    // リクエスト失敗：モーダル上でエラー表示・ボタンを押して再度選択
+    setIsOpenError(true)
   }
 
-  console.log(selectedIdea)
+  const closeErrorHandler = () => {
+    setIsOpenModal(false)
+    setIsOpenError(false)
+  }
 
   return (
     <>
       {isOpenModal && (
         <ModalOverlay>
-          <>
-            <div css={ModalBox}>
-              <div css={ModalContentContainer}>
-                <div css={ModalHeaderWrapper}>
-                  <h1 css={ModalTitle}>README</h1>
-                </div>
-                <div css={ReadmeContainer}>
-                  <div css={ReadmeWrapper}>{dummyReadme}</div>
-                </div>
-              </div>
-            </div>
-            <div css={ButtonContainer}>
-              <div css={ButtonWrapper}>
-                <CustomButton onClick={() => CopyButtonHandler()}>
-                  {copiedButton
-                    ? 'コピーしました！'
-                    : '生成したREADMEをコピーする'}
-                </CustomButton>
-              </div>
-              <div css={ButtonWrapper}>
-                <CustomButton onClick={() => ModalCloseButtonHandler()}>
-                  モーダルを閉じる
-                </CustomButton>
-              </div>
-            </div>
-          </>
+          {isOpenError ? (
+            <ErrorModal
+              errorMessage="生成に失敗しました。もう一度選択し直してください。"
+              onClick={() => closeErrorHandler()}
+            />
+          ) : (
+            <>
+              {isOpenReadme ? (
+                <>
+                  <div css={ModalBox}>
+                    <div css={ModalContentContainer}>
+                      <div css={ModalHeaderWrapper}>
+                        <h1 css={ModalTitle}>README</h1>
+                      </div>
+                      <div css={ReadmeContainer}>
+                        <div css={ReadmeWrapper}>{dummyReadme}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div css={ButtonContainer}>
+                    <div css={ButtonWrapper}>
+                      <CustomButton onClick={() => CopyButtonHandler()}>
+                        {copiedButton
+                          ? 'コピーしました！'
+                          : '生成したREADMEをコピーする'}
+                      </CustomButton>
+                    </div>
+                    <div css={ButtonWrapper}>
+                      <CustomButton onClick={() => ModalCloseButtonHandler()}>
+                        モーダルを閉じる
+                      </CustomButton>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <p css={LoadingText}>生成中（アニメーションいれたい）</p>
+              )}
+            </>
+          )}
         </ModalOverlay>
       )}
 

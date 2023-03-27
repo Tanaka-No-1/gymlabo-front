@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div css={Container}>
       <Link href="/">
-        <h1 css={AppName}>アプリ名</h1>
+        <h1 css={AppName}>GAKU</h1>
       </Link>
     </div>
   )

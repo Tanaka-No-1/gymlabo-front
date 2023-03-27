@@ -90,3 +90,10 @@ export const ButtonWrapper = css`
   display: flex;
   justify-content: center;
 `
+
+export const LoadingText = css`
+  font-size: 50px;
+  font-weight: bold;
+  color: ${Palette.WHITE};
+  margin: 0;
+`

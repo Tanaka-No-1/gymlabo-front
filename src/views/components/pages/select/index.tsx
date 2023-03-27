@@ -10,12 +10,11 @@ import {
 } from '../../../../testdata/skills'
 import GenreList from '../../base/GenreList'
 import CustomButton from '../../base/customButton'
+import ErrorModal from '../../base/errorModal'
 import ModalOverlay from '../../base/modalOverlay'
 import CommentBubble from '../../ui/commentBubble'
 import {
-  ErrorText,
   LoadingText,
-  ModalBox,
   SelectListContainer,
   SelectListWrapper,
   SendButtonContainer,
@@ -85,16 +84,10 @@ const SelectPage = () => {
       {isOpenModal && (
         <ModalOverlay>
           {isOpenError ? (
-            <div css={ModalBox}>
-              <div css={ErrorText}>
-                <p>生成に失敗しました。もう一度選択し直してください。</p>
-              </div>
-              <div>
-                <CustomButton onClick={() => closeModalHandler()}>
-                  再選択
-                </CustomButton>
-              </div>
-            </div>
+            <ErrorModal
+              errorMessage="生成に失敗しました。もう一度選択し直してください。"
+              onClick={() => closeModalHandler()}
+            />
           ) : (
             <p css={LoadingText}>生成中（アニメーションいれたい）</p>
           )}
