@@ -26,17 +26,17 @@ const generateIdeas: GenerateIdeas = async (skill) => {
     ],
   })
 
-  const array = completion.data.choices[0].message?.content
+  const message = completion.data.choices[0].message?.content
+  if (message == undefined || message.charAt(0)!= '[' || message.charAt(message.length - 1)!= ']') {
+    throw new Error('generateIdeas message is undefined or not array')
+  }
+  const array = message
     .replace('[', '')
     .replace(/\n/g, '')
     .replace(/ /g, '')
     .replace(/"/g, '')
     .replace(']', '')
     .split(',')
-
-  if (array == undefined) {
-    throw new Error('generateIdeas array is undefined')
-  }
 
   return array
 }
