@@ -78,4 +78,7 @@ export enum Size {
 }
 
 //z-index
-export enum Z_INDEX {}
+export enum ZIndex {
+  OVERLAY = 100,
+  MODAL = 110,
+}

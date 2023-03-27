@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import {
   languages,
@@ -23,6 +24,18 @@ const SelectPage = () => {
   const [frameworkSelected, setFrameworkSelected] = useState<Skill[]>([])
   const [databaseSelected, setDatabaseSelected] = useState<Skill[]>([])
   const [serviceSelected, setServiceSelected] = useState<Skill[]>([])
+
+  const router = useRouter()
+
+  const sendButtonHandler = () => {
+    console.log({
+      languages: langSelected.map((item) => item.name),
+      framework: frameworkSelected.map((item) => item.name),
+      database: databaseSelected.map((item) => item.name),
+      service: serviceSelected.map((item) => item.name),
+    })
+    router.push('/result')
+  }
 
   return (
     <>
@@ -56,16 +69,7 @@ const SelectPage = () => {
         </div>
       </div>
       <div css={SendButtonContainer}>
-        <CustomButton
-          onClick={() =>
-            console.log({
-              languages: langSelected.map((item) => item.name),
-              framework: frameworkSelected.map((item) => item.name),
-              database: databaseSelected.map((item) => item.name),
-              service: serviceSelected.map((item) => item.name),
-            })
-          }
-        >
+        <CustomButton onClick={() => sendButtonHandler()}>
           {sendButtonText}
         </CustomButton>
       </div>
