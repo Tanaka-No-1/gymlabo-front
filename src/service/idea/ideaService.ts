@@ -5,7 +5,10 @@ type Ideas = readonly string[]
 
 export default class IdeaService {
   /** 同時アイデア生成回数 */
-  static readonly MULTI_GENERATE_COUNT = 5
+  static readonly MULTI_GENERATE_COUNT = 3
+
+  /** 試行上限回数 */
+  static readonly TRY_LIMIT = 3
 
   constructor(private readonly ideasGenerator: GenerateIdeas) {}
 
@@ -21,9 +24,12 @@ export default class IdeaService {
   private async generateUntilOneOrMore(
     skillSet: SkillSet,
   ): Promise<readonly Ideas[]> {
-    const ideas = await this.multiGenerate(skillSet)
-    if (ideas.length === 0) return this.generateUntilOneOrMore(skillSet)
-    return ideas
+    for (let i = 0; i < IdeaService.TRY_LIMIT; i++) {
+      const ideas = await this.multiGenerate(skillSet)
+      if (ideas.length === 0) continue
+      return ideas
+    }
+    throw new Error(`${IdeaService.MULTI_GENERATE_COUNT}回同時試行を${IdeaService.TRY_LIMIT}回失敗`)
   }
 
   /** アイデアを同時に複数個生成する。エラーが出たものは取り除かれる */
