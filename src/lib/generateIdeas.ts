@@ -27,7 +27,11 @@ const generateIdeas: GenerateIdeas = async (skill) => {
   })
 
   const message = completion.data.choices[0].message?.content
-  if (message == undefined || message.charAt(0)!= '[' || message.charAt(message.length - 1)!= ']') {
+  if (
+    message == undefined ||
+    message.charAt(0) != '[' ||
+    message.charAt(message.length - 1) != ']'
+  ) {
     throw new Error('generateIdeas message is undefined or not array')
   }
   const array = message
