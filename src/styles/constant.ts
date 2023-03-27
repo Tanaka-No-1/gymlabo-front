@@ -1,5 +1,3 @@
-import { Palette } from './palette'
-
 //BreakPoint
 /**
  * @desc 基本 max-width ではなく min-width を使用する
@@ -81,15 +79,3 @@ export enum Size {
 
 //z-index
 export enum Z_INDEX {}
-
-//color
-/**
- * @desc ./palette からコンポーネントで直接importしない
- * @desc ここで用途ごとにカラーパレットを再定義する
- */
-export const FontColors = {
-  PRIMARY: {
-    DEFAULT: Palette.BLACK_800,
-    HOVER: Palette.BLACK_500,
-  },
-}
