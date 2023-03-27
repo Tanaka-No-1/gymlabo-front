@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ReadmeRequestDataScheme } from '~/interfaces/api/readme/POSTRequest'
+import {
+  ReadmeRequestDataScheme,
+  ReadmeRequestDataValidate,
+} from '~/interfaces/api/readme/POSTRequest'
 import generateReadme from '~/lib/generateReadme'
 import ReadmeService from '~/service/readme/readmeService'
 
@@ -20,6 +23,7 @@ export default async function handler(
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const data = ReadmeRequestDataScheme.parse(req.body)
+  ReadmeRequestDataValidate(data)
   const text = await readmeService.generate(data.skillSet, data.idea)
   res.status(200).json({ text })
 }
