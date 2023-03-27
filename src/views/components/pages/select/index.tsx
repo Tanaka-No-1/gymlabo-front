@@ -60,10 +60,10 @@ const SelectPage = () => {
         <CustomButton
           onClick={() =>
             console.log({
-              languages: langSelected,
-              framework: frameworkSelected,
-              database: databaseSelected,
-              service: serviceSelected,
+              languages: langSelected.map((item) => item.name),
+              framework: frameworkSelected.map((item) => item.name),
+              database: databaseSelected.map((item) => item.name),
+              service: serviceSelected.map((item) => item.name),
             })
           }
         >
