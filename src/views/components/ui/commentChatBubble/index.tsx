@@ -1,23 +1,13 @@
 import { Bubble, CommentText } from './style'
 
 type Props = {
-  text: string | string[]
+  text: string
 }
 
 const CommentChatBubble = ({ text }: Props) => {
   return (
     <div css={Bubble}>
-      {typeof text === 'string' ? (
-        <p css={CommentText}>{text}</p>
-      ) : (
-        text.map((p) => {
-          return (
-            <p css={CommentText} key={p}>
-              {p}
-            </p>
-          )
-        })
-      )}
+      <p css={CommentText}>{text}</p>
     </div>
   )
 }
