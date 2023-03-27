@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
+import { Palette } from '~/styles/palette'
 
 export const container = css`
-  background-color: red;
+  background-color: ${Palette.GREEN.main};
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 72px);
 `
