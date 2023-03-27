@@ -8,11 +8,6 @@ const resultMessage = [
   '気に入ったものをタップしてください。',
 ]
 
-type Props = {
-  idea: string[]
-  resultChatMessage: string[]
-}
-
 const ResultPage = () => {
   const [resultChatMessage, setResultChatMessage] = useState<string[]>([])
   useEffect(() => {
