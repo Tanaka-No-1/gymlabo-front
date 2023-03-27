@@ -1,5 +1,5 @@
-import SkillDataPOST from '~/interfaces/api/skill/POST'
+import SkillSet from '~/interfaces/skillSet'
 
-type GenerateIdeas = (data: SkillDataPOST) => Promise<readonly string[]>
+type GenerateIdeas = (skillSet: SkillSet) => Promise<readonly string[]>
 
 export default GenerateIdeas

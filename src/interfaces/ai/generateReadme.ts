@@ -1,7 +1,7 @@
-import SkillDataPOST from '~/interfaces/api/skill/POST'
+import SkillSet from '~/interfaces/skillSet'
 
 type GenerateReadme = (
-  skill: SkillDataPOST,
+  skillSet: SkillSet,
   applicationContent: string,
 ) => Promise<string>
 
