@@ -1,4 +1,5 @@
-import Skill from '~/interfaces/models'
+import { z } from 'zod'
+import Skill, { SkillScheme } from '~/interfaces/models'
 
 /** ユーザーが選択後に/api/skillに対してPOSTでバックエンドに送信する */
 export default interface SkillDataPOST {
@@ -14,3 +15,10 @@ export default interface SkillDataPOST {
   /** ジャンル: その他 */
   service: readonly Skill[]
 }
+
+export const SkillDataPOSTScheme = z.object({
+  language: SkillScheme.array(),
+  framework: SkillScheme.array(),
+  database: SkillScheme.array(),
+  service: SkillScheme.array(),
+})
