@@ -2,10 +2,10 @@ import { Configuration, OpenAIApi } from 'openai'
 import GenerateIdeas from '~/interfaces/ai/generateIdeas'
 
 const generateIdeas: GenerateIdeas = async (skill) => {
-  const l = skill.language.filter((_) => _).join(' ')
-  const f = skill.framework.filter((_) => _).join(' ')
-  const d = skill.database.filter((_) => _).join(' ')
-  const s = skill.service.filter((_) => _).join(' ')
+  const l = skill.language.join(' ')
+  const f = skill.framework.join(' ')
+  const d = skill.database.join(' ')
+  const s = skill.service.join(' ')
 
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
@@ -34,7 +34,11 @@ const generateIdeas: GenerateIdeas = async (skill) => {
     .replace(']', '')
     .split(',')
 
-  return array ?? ['']
+  if (array == undefined) {
+    throw new Error('generateIdeas array is undefined')
+  }
+
+  return array
 }
 
 export default generateIdeas
