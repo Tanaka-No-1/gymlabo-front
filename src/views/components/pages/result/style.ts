@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { Palette } from '~/styles/palette'
 
 export const Container = css`
   max-width: 1100px;
@@ -15,5 +14,5 @@ export const ResultListContainer = css`
 export const ResultListWrapper = css`
   height: 100%;
   overflow-y: scroll;
-  padding: 0 30px 0 36px;
+  padding: 10px 30px 10px 36px;
 `
