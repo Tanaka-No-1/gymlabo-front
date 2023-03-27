@@ -1,5 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { SkillDataPOSTScheme } from '~/interfaces/api/skill/POSTRequest'
+import generateIdeas from '~/lib/generateIdeas'
+import IdeaService from '~/service/idea/ideaService'
+
+const ideaService = new IdeaService(generateIdeas)
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,6 +20,6 @@ export default async function handler(
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const data = SkillDataPOSTScheme.parse(req.body)
-  console.log(data)
-  res.status(201).end(null)
+  const ideas = await ideaService.generate(data.skillSet)
+  res.status(200).json({ ideas })
 }
