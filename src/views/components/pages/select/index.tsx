@@ -27,7 +27,12 @@ const SelectPage = () => {
 
   const router = useRouter()
 
-  const sendButtonHandler = () => {
+  const sendButtonHandler = async () => {
+    // リクエストを投げる
+    // ローディング中モーダルを表示
+    // リクエスト成功：Recoilにデータを保存後/resultに遷移
+    // リクエスト失敗：モーダルにエラーと表示、ボタンを押してモーダルを閉じて再選択
+
     console.log({
       languages: langSelected.map((item) => item.name),
       framework: frameworkSelected.map((item) => item.name),

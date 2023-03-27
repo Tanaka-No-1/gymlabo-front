@@ -97,6 +97,7 @@ const ResultPage = () => {
   const [resultReadme, setResultReadMe] = useState<string>('')
 
   useEffect(() => {
+    // Recoil上からアイデア一覧データを取得
     setResultChatMessage([
       'Buddy Finder：同じ趣味を持つ人たちを見つけられるアプリです。ReactとKotlinを使用して開発。PostgreSQLを使用してユーザー情報を管理。AWSを利用して デプロイ。',
       'Eco-Friendly Travel：地球に優しい旅を提供するアプリです。GCPを使用して検索エンジンを作成。Reactを使用してユーザーインターフェースを開発。PostgreSQLを使用してユーザー情報を管理。Azureを利用してデプロイ。',
@@ -131,6 +132,11 @@ const ResultPage = () => {
   }
 
   const SelectIdeaButtonHandler = (idea: string) => {
+    // リクエストを投げる
+    // モーダルを表示(ローディング中)
+    // リクエスト成功：モーダルを取得データに変更
+    // リクエスト失敗：モーダル上でエラー表示・ボタンを押して再度選択
+
     setSelectedIdea(idea)
     setIsOpenModal(true)
   }
