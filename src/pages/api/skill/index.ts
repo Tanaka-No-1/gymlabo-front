@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { SkillDataPOSTScheme } from '~/interfaces/api/skill/POST'
+import { SkillDataPOSTScheme } from '~/interfaces/api/skill/POSTRequest'
 
 export default async function handler(
   req: NextApiRequest,
