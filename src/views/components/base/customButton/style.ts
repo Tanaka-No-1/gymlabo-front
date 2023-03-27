@@ -5,7 +5,6 @@ export const Container = css`
   padding: 10px 30px 10px 30px;
   width: fit-content;
   min-width: 300px;
-  height: 60px;
   background-color: ${Palette.YELLOW.main};
   display: flex;
   justify-content: center;
