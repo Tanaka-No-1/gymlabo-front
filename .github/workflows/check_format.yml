@@ -22,3 +22,5 @@ jobs:
       - name: Run eslint
         run: |
           yarn eslint --ext '.js,.ts' .
+      - name: Run Unit Test
+        run: yarn vitest
