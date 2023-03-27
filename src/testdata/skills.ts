@@ -1,3 +1,8 @@
+export type Skill = {
+  name: string
+  url: string
+}
+
 export const languages = [
   {
     name: 'Lisp',
