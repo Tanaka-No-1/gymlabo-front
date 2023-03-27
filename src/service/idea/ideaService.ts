@@ -29,7 +29,9 @@ export default class IdeaService {
       if (ideas.length === 0) continue
       return ideas
     }
-    throw new Error(`${IdeaService.MULTI_GENERATE_COUNT}回同時試行を${IdeaService.TRY_LIMIT}回失敗`)
+    throw new Error(
+      `${IdeaService.MULTI_GENERATE_COUNT}回同時試行を${IdeaService.TRY_LIMIT}回失敗`,
+    )
   }
 
   /** アイデアを同時に複数個生成する。エラーが出たものは取り除かれる */
