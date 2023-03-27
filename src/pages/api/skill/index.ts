@@ -1,29 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import SkillDataGet from '~/interfaces/api/skill/GET'
 import { SkillDataPOSTScheme } from '~/interfaces/api/skill/POST'
-import topazScraper from '~/lib/topazScraper'
-import TopazSkillStore from '~/service/api/topazSkillStore'
-
-const store = new TopazSkillStore(topazScraper)
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SkillDataGet>,
+  res: NextApiResponse,
 ) {
   switch (req.method) {
-    case 'GET':
-      await GET(req, res)
-      return
     case 'POST':
       await POST(req, res)
       return
     default:
-      res.status(404)
+      res.status(404).end(null)
   }
-}
-
-async function GET(req: NextApiRequest, res: NextApiResponse<SkillDataGet>) {
-  res.status(200).json(await store.get())
 }
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
