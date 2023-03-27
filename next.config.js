@@ -5,6 +5,9 @@ const nextConfig = {
   experimental: {
     outputStandalone: true,
   },
+  images: {
+    domains: ['ptera-publish.topaz.dev'],
+  },
 }
 
 module.exports = nextConfig
