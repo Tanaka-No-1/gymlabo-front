@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { ZIndex } from '~/styles/constant'
 import { Palette } from '~/styles/palette'
 
 export const SelectListContainer = css`
@@ -31,4 +32,49 @@ export const SendButtonContainer = css`
   width: 100%;
   display: flex;
   justify-content: center;
+`
+
+// modal
+export const ModalOverlay = css`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: ${ZIndex.OVERLAY};
+  background: rgba(0, 0, 0, 0.54);
+`
+
+export const ModalContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: ${ZIndex.MODAL};
+`
+
+export const LoadingText = css`
+  font-size: 50px;
+  font-weight: bold;
+  color: ${Palette.WHITE};
+  margin: 0;
+`
+
+export const ModalBox = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${Palette.WHITE};
+  min-height: 30%;
+  width: 80%;
+  border-radius: 30px;
+  padding: 20px;
+`
+
+export const ErrorText = css`
+  font-size: 30px;
+  font-weight: bold;
 `

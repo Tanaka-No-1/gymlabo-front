@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
 import CustomButton from '../../base/customButton'
+import ModalOverlay from '../../base/modalOverlay'
 import CommentBubble from '../../ui/commentBubble'
 import CommentChatBubble from '../../ui/commentChatBubble'
 import {
@@ -8,10 +10,8 @@ import {
   ButtonWrapper,
   Container,
   ModalBox,
-  ModalContainer,
   ModalContentContainer,
   ModalHeaderWrapper,
-  ModalOverlay,
   ModalTitle,
   ReadmeContainer,
   ReadmeWrapper,
@@ -19,6 +19,7 @@ import {
   ResultListWrapper,
   TopLinkButtonWrapper,
 } from './style'
+import { ideaListState } from '~/stores/atoms'
 
 const resultMessage = [
   '次のようなアイデアを提案します。',
@@ -96,16 +97,12 @@ const ResultPage = () => {
   const [selectedIdea, setSelectedIdea] = useState<string>('')
   const [resultReadme, setResultReadMe] = useState<string>('')
 
+  const ideaList = useRecoilValue(ideaListState)
+
   useEffect(() => {
     // Recoil上からアイデア一覧データを取得
-    setResultChatMessage([
-      'Buddy Finder：同じ趣味を持つ人たちを見つけられるアプリです。ReactとKotlinを使用して開発。PostgreSQLを使用してユーザー情報を管理。AWSを利用して デプロイ。',
-      'Eco-Friendly Travel：地球に優しい旅を提供するアプリです。GCPを使用して検索エンジンを作成。Reactを使用してユーザーインターフェースを開発。PostgreSQLを使用してユーザー情報を管理。Azureを利用してデプロイ。',
-      'Foodie Friend：ご当地グルメを共有するアプリです。Kotlinを使用して開発 。AWSを利用してデプロイ。PostgreSQLを使用してユーザー情報を管理。',
-      'PetPal：ペットを飼っている人たちのためのソーシャルネットワークアプリです。Reactを使用してユーザーインターフェースを開発。GCPを使用して検索エン ジンを作成。PostgreSQLを使用してユーザー情報を管理。Azureを利用してデプロイ。',
-      'Green Wallet：環境保護に貢献するためのアプリです。Kotlinを使用して開発。AWSを利用してデプロイ。PostgreSQLを使用してユーザー情報を管理。',
-    ])
-  }, [])
+    setResultChatMessage(ideaList)
+  }, [ideaList])
 
   useEffect(() => {
     setResultReadMe(dummyReadme)
@@ -146,8 +143,8 @@ const ResultPage = () => {
   return (
     <>
       {isOpenModal && (
-        <div css={ModalOverlay}>
-          <div css={ModalContainer}>
+        <ModalOverlay>
+          <>
             <div css={ModalBox}>
               <div css={ModalContentContainer}>
                 <div css={ModalHeaderWrapper}>
@@ -172,8 +169,8 @@ const ResultPage = () => {
                 </CustomButton>
               </div>
             </div>
-          </div>
-        </div>
+          </>
+        </ModalOverlay>
       )}
 
       <div css={Container}>
