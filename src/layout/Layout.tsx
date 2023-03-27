@@ -9,6 +9,6 @@ type LayoutProps = Required<{
 export const Layout = ({ children }: LayoutProps) => (
   <>
     <Header />
-    <div css={container}> {children}</div>
+    <div css={container}>{children}</div>
   </>
 )
