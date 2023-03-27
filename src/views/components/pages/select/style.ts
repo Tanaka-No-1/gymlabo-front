@@ -35,25 +35,6 @@ export const SendButtonContainer = css`
 `
 
 // modal
-export const ModalOverlay = css`
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: ${ZIndex.OVERLAY};
-  background: rgba(0, 0, 0, 0.54);
-`
-
-export const ModalContainer = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  z-index: ${ZIndex.MODAL};
-`
 
 export const LoadingText = css`
   font-size: 50px;
