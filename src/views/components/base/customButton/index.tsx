@@ -8,7 +8,7 @@ type Props = {
 
 const CustomButton: FC<Props> = (props) => {
   return (
-    <button onClick={() => props.onClick && props.onClick?.()} css={Container}>
+    <button onClick={() => props.onClick ?? (() => {})} css={Container}>
       {props.children}
     </button>
   )
