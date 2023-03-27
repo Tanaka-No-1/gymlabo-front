@@ -25,8 +25,12 @@ const ResultPage = () => {
       <CommentBubble text={resultMessage} />
       <div css={ResultListContainer}>
         <div css={ResultListWrapper}>
-          {resultChatMessage.map((p, index) => (
-            <CommentChatBubble key={index} text={p} />
+          {resultChatMessage.map((p) => (
+            <CommentChatBubble
+              key={p}
+              text={p}
+              onClick={() => console.log(p)}
+            />
           ))}
         </div>
       </div>
