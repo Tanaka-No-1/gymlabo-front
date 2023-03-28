@@ -1,24 +1,15 @@
 import { Bubble, CommentText } from './style'
 
 type Props = {
-  text: string | string[]
+  text: string
+  onClick?: () => void
 }
 
-const CommentChatBubble = ({ text }: Props) => {
+const CommentChatBubble = ({ text, onClick }: Props) => {
   return (
-    <div css={Bubble}>
-      {typeof text === 'string' ? (
-        <p css={CommentText}>{text}</p>
-      ) : (
-        text.map((p) => {
-          return (
-            <p css={CommentText} key={p}>
-              {p}
-            </p>
-          )
-        })
-      )}
-    </div>
+    <button css={Bubble} onClick={onClick ?? (() => {})}>
+      <p css={CommentText}>{text}</p>
+    </button>
   )
 }
 
