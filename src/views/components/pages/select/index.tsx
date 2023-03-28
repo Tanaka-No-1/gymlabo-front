@@ -26,7 +26,7 @@ const questionText = '使いたい技術をチェックしてください(複数
 const sendButtonText = '送信'
 
 const SelectPage = () => {
-  const [langSelected, setLangSelected] = useState<Skill[]>([])
+  const [languageSelected, setLanguageSelected] = useState<Skill[]>([])
   const [frameworkSelected, setFrameworkSelected] = useState<Skill[]>([])
   const [databaseSelected, setDatabaseSelected] = useState<Skill[]>([])
   const [serviceSelected, setServiceSelected] = useState<Skill[]>([])
@@ -44,7 +44,7 @@ const SelectPage = () => {
 
     const postData: SkillPostRequestData = {
       skillSet: {
-        language: langSelected.map((item) => item.name),
+        language: languageSelected.map((item) => item.name),
         framework: frameworkSelected.map((item) => item.name),
         database: databaseSelected.map((item) => item.name),
         service: serviceSelected.map((item) => item.name),
@@ -59,9 +59,7 @@ const SelectPage = () => {
       body: JSON.stringify(postData),
     }
 
-    const URL = '/api/skill'
-
-    const res = await fetch(URL, param)
+    const res = await fetch('/api/skill', param)
     if (!res.ok) {
       console.error(res)
       setIsOpenError(true)
@@ -99,8 +97,8 @@ const SelectPage = () => {
           <GenreList
             skills={languages}
             genreName={'言語'}
-            selected={langSelected}
-            setSelected={setLangSelected}
+            selected={languageSelected}
+            setSelected={setLanguageSelected}
           />
           <GenreList
             skills={framework}

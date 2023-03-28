@@ -48,7 +48,7 @@ const ResultPage = () => {
     } else {
       setResultChatMessage(ideaList)
     }
-  }, [ideaList])
+  }, [])
 
   const router = useRouter()
 
@@ -70,14 +70,11 @@ const ResultPage = () => {
     router.push('/')
   }
 
-  // 待機検証用
-
   const SelectIdeaButtonHandler = async (idea: string) => {
     setIsOpenModal(true)
 
-    // リクエストを投げる
     const postData: ReadmeRequestData = {
-      skillSet: skillSet,
+      skillSet,
       idea,
     }
 
@@ -89,9 +86,7 @@ const ResultPage = () => {
       body: JSON.stringify(postData),
     }
 
-    const URL = '/api/readme'
-
-    const res = await fetch(URL, param)
+    const res = await fetch('/api/readme', param)
     if (!res.ok) {
       console.error(res)
       setIsOpenError(true)
