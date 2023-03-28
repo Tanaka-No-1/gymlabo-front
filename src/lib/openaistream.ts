@@ -17,6 +17,10 @@ export async function OpenAIStream(payload: any) {
     body: JSON.stringify(payload),
   })
 
+  if (!res.ok) {
+    throw new Error('OpenAI Connection Error')
+  }
+
   const stream = new ReadableStream({
     async start(controller) {
       function onParse(event: ParsedEvent | ReconnectInterval) {
