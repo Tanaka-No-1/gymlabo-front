@@ -144,7 +144,7 @@ const ResultPage = () => {
                   </div>
                 </>
               ) : (
-                <LoadingAnimation text="README" />
+                <LoadingAnimation text="README生成中" />
               )}
             </>
           )}

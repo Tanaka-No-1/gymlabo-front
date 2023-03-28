@@ -15,7 +15,6 @@ export const ResultListContainer = css`
 `
 export const ResultListWrapper = css`
   height: 100%;
-  overflow-y: scroll;
   padding: 10px 30px 10px 36px;
 `
 

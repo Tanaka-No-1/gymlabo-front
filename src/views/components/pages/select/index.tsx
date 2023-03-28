@@ -87,7 +87,7 @@ const SelectPage = () => {
               onClick={() => closeModalHandler()}
             />
           ) : (
-            <LoadingAnimation text="アイデア" />
+            <LoadingAnimation text="アイデア生成中" />
           )}
         </ModalOverlay>
       )}
