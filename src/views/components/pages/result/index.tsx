@@ -21,76 +21,13 @@ import {
   ResultListWrapper,
   TopLinkButtonWrapper,
 } from './style'
-import { ideaListState } from '~/stores/atoms'
+import ReadmeRequestData from '~/interfaces/api/readme/POSTRequest'
+import { ideaListState, skillSetState } from '~/stores/atoms'
 
 const resultMessage = [
   '次のようなアイデアを提案します。',
   '気に入ったものをタップしてください。',
 ]
-
-const dummyReadme = `アプリ名
-
-ポストイットボード
-
-アプリ概要
-
-チームメンバーとアイデアを共有するためのプラットフォーム。ユーザーは自分のアイデアをポストイットに書き込み、他の人と共有することができます。
-
-使用技術
-
-Next.js：Reactベースのサーバーサイドレンダリングフレームワーク
-React：ユーザーインターフェイスの構築のためのJavaScriptライブラリ
-Firebase：データベースおよび認証のためのクラウドプラットフォーム
-
-シーケンス図
-
-mermaid
-Copy code
-sequenceDiagram
-  participant User
-  participant Board
-  participant Firebase
-
-  User->>Board: アイデアをポストイットに書き込む
-  Board->>Firebase: ポストイットをデータベースに保存
-  Firebase->>Board: ポストイットの保存状況を返す
-  Board->>User: ポストイットの保存状況を表示
-
-使用技術のインストール方法
-
-Node.jsをインストールします。
-Firebaseを利用するため、Googleアカウントが必要です。Googleアカウントを持っていない場合は、先にGoogleアカウントを作成してください。
-Firebaseコンソールからプロジェクトを作成し、プロジェクトの設定でWebアプリを追加してFirebaseの設定情報を取得します。
-コマンドラインからプロジェクトをクローンします。
-bash
-Copy code
-git clone https://github.com/<user>/<repo>.git
-プロジェクトのルートディレクトリに移動し、npmパッケージをインストールします。
-bash
-Copy code
-cd <repo>
-npm install
-Firebaseの設定情報を.env.localファイルに追加します。
-makefile
-Copy code
-NEXT_PUBLIC_API_KEY=<API_KEY>
-NEXT_PUBLIC_AUTH_DOMAIN=<AUTH_DOMAIN>
-NEXT_PUBLIC_PROJECT_ID=<PROJECT_ID>
-NEXT_PUBLIC_STORAGE_BUCKET=<STORAGE_BUCKET>
-NEXT_PUBLIC_MESSAGING_SENDER_ID=<MESSAGING_SENDER_ID>
-NEXT_PUBLIC_APP_ID=<APP_ID>
-開発用サーバーを起動します。
-arduino
-Copy code
-npm run dev
-
-アプリの使い方
-
-ポストイットボードのページにアクセスします。
-ユーザー名を入力してログインします。
-ポストイットにアイデアを書き込んで投稿します。
-投稿されたポストイットは、他のユーザーにも表示されます。他のユーザーの投稿も閲覧できます。
-ログアウトする場合は、ページ右上のログアウトボタンをクリックします。`
 
 const ResultPage = () => {
   const [resultChatMessage, setResultChatMessage] = useState<string[]>([])
@@ -103,6 +40,7 @@ const ResultPage = () => {
   const [resultReadme, setResultReadMe] = useState<string>('')
 
   const ideaList = useRecoilValue(ideaListState)
+  const skillSet = useRecoilValue(skillSetState)
 
   useEffect(() => {
     // Recoil上からアイデア一覧データを取得
@@ -135,24 +73,36 @@ const ResultPage = () => {
   }
 
   // 待機検証用
-  const sleep = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms))
 
   const SelectIdeaButtonHandler = async (idea: string) => {
     setSelectedIdea(idea)
-    // モーダルを表示(ローディング中)
     setIsOpenModal(true)
 
     // リクエストを投げる
-    console.log(selectedIdea)
-    await sleep(5000)
+    const postData: ReadmeRequestData = {
+      skillSet: skillSet,
+      idea,
+    }
 
-    // リクエスト成功：モーダルを取得データに変更
-    // setResultReadMe(dummyReadme)
-    // setIsOpenReadme(true)
+    const param = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    }
 
-    // リクエスト失敗：モーダル上でエラー表示・ボタンを押して再度選択
-    setIsOpenError(true)
+    const URL = '/api/readme'
+
+    const res = await fetch(URL, param)
+    if (!res.ok) {
+      console.error(res)
+      setIsOpenError(true)
+      return
+    }
+    const json = await res.json()
+    setResultReadMe(json.text)
+    setIsOpenReadme(true)
   }
 
   const closeErrorHandler = () => {
@@ -179,7 +129,7 @@ const ResultPage = () => {
                         <h1 css={ModalTitle}>README</h1>
                       </div>
                       <div css={ReadmeContainer}>
-                        <div css={ReadmeWrapper}>{dummyReadme}</div>
+                        <div css={ReadmeWrapper}>{resultReadme}</div>
                       </div>
                     </div>
                   </div>
