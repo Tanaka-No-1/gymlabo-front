@@ -36,7 +36,6 @@ const ResultPage = () => {
   const [isOpenError, setIsOpenError] = useState<boolean>(false)
   const [isOpenReadme, setIsOpenReadme] = useState<boolean>(false)
   const [copiedButton, setCopiedButton] = useState<boolean>(false)
-  const [selectedIdea, setSelectedIdea] = useState<string>('')
   const [resultReadme, setResultReadMe] = useState<string>('')
 
   const ideaList = useRecoilValue(ideaListState)
@@ -57,7 +56,6 @@ const ResultPage = () => {
     setIsOpenModal(false)
     setIsOpenReadme(false)
     setCopiedButton(false)
-    setSelectedIdea('')
     setResultReadMe('')
   }
 
@@ -75,7 +73,6 @@ const ResultPage = () => {
   // 待機検証用
 
   const SelectIdeaButtonHandler = async (idea: string) => {
-    setSelectedIdea(idea)
     setIsOpenModal(true)
 
     // リクエストを投げる

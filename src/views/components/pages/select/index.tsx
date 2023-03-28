@@ -61,17 +61,16 @@ const SelectPage = () => {
 
     const URL = '/api/skill'
 
-    await fetch(URL, param)
-      .then((res) => res.json())
-      .then((data) => {
-        setIdeaList(data.ideas)
-        setSkillSet(postData.skillSet)
-        router.push('/result')
-      })
-      .catch((e) => {
-        console.error(e)
-        setIsOpenError(true)
-      })
+    const res = await fetch(URL, param)
+    if (!res.ok) {
+      console.error(res)
+      setIsOpenError(true)
+      return
+    }
+    const json = await res.json()
+    setIdeaList(json.ideas)
+    setSkillSet(postData.skillSet)
+    router.push('/result')
   }
 
   const closeModalHandler = () => {
