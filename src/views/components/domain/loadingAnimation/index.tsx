@@ -1,7 +1,7 @@
 import { Screen, Pencil, PencilCover, Txt } from './style'
 
 type Props = {
-  text: string | string[]
+  text: string
 }
 
 const LoadingAnimation = ({ text }: Props) => {

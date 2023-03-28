@@ -12,7 +12,6 @@ import {
   ButtonContainer,
   ButtonWrapper,
   Container,
-  // LoadingText,
   ModalBox,
   ModalContentContainer,
   ModalHeaderWrapper,
