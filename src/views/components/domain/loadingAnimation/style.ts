@@ -13,7 +13,7 @@ export const ScreenWrapper = css`
 `
 
 export const Screen = css`
-  width: 400px;
+  width: 800px;
   height: 400px;
   display: flex;
   align-items: center;
@@ -21,6 +21,7 @@ export const Screen = css`
   margin: 10px;
   background-color: #fff;
   border: 1px solid #000;
+  border-radius: 30px;
 `
 export const PencilCover = css`
   display: flex;
