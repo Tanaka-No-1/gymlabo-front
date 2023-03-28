@@ -12,6 +12,7 @@ import GenreList from '../../base/GenreList'
 import CustomButton from '../../base/customButton'
 import ErrorModal from '../../base/errorModal'
 import ModalOverlay from '../../base/modalOverlay'
+import LoadingAnimation from '../../domain/loadingAnimation'
 import CommentBubble from '../../ui/commentBubble'
 import {
   LoadingText,
@@ -89,7 +90,7 @@ const SelectPage = () => {
               onClick={() => closeModalHandler()}
             />
           ) : (
-            <p css={LoadingText}>生成中（アニメーションいれたい）</p>
+                <LoadingAnimation text="アイデア" />
           )}
         </ModalOverlay>
       )}
