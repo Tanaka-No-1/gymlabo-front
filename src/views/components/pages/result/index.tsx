@@ -5,13 +5,13 @@ import { useRecoilValue } from 'recoil'
 import CustomButton from '../../base/customButton'
 import ErrorModal from '../../base/errorModal'
 import ModalOverlay from '../../base/modalOverlay'
+import LoadingAnimation from '../../domain/loadingAnimation'
 import CommentBubble from '../../ui/commentBubble'
 import CommentChatBubble from '../../ui/commentChatBubble'
 import {
   ButtonContainer,
   ButtonWrapper,
   Container,
-  LoadingText,
   ModalBox,
   ModalContentContainer,
   ModalHeaderWrapper,
@@ -144,7 +144,7 @@ const ResultPage = () => {
                   </div>
                 </>
               ) : (
-                <p css={LoadingText}>生成中（アニメーションいれたい）</p>
+                <LoadingAnimation text="README" />
               )}
             </>
           )}
