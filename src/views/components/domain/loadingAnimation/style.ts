@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 
-
 export const ScreenWrapper = css`
   width: 500px;
   height: 500px;
@@ -24,17 +23,16 @@ export const Screen = css`
   border: 1px solid #000;
 `
 export const PencilCover = css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    border-radius: 50%;
-    background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #fff;
 `
 
 export const Txt = css`
-    font-size: large;
-    
+  font-size: large;
 `
 
 export const Pencil = css`
@@ -75,4 +73,4 @@ export const Pencil = css`
       transform: translateX(0);
     }
   }
-`;
+`
