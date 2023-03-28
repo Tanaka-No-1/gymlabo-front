@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { useRecoilValue } from 'recoil'
 import CustomButton from '../../base/customButton'
 import ErrorModal from '../../base/errorModal'
@@ -121,7 +122,9 @@ const ResultPage = () => {
                         <h1 css={ModalTitle}>README</h1>
                       </div>
                       <div css={ReadmeContainer}>
-                        <div css={ReadmeWrapper}>{resultReadme}</div>
+                        <div css={ReadmeWrapper}>
+                          <ReactMarkdown>{resultReadme}</ReactMarkdown>
+                        </div>
                       </div>
                     </div>
                   </div>

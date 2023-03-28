@@ -21,11 +21,13 @@
     "openai": "^3.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-markdown": "^8.0.6",
     "recoil": "^0.7.7",
     "vite-tsconfig-paths": "^4.0.7",
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/mermaid": "^9.2.0",
     "@types/node": "18.15.10",
     "@types/react": "18.0.29",
     "@types/react-dom": "18.0.11",
@@ -38,6 +40,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^21.1.1",
+    "mermaid": "^10.0.2",
     "prettier": "^2.8.7",
     "typescript": "^5.0.2",
     "vitest": "^0.29.7"
