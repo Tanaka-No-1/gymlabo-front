@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { ZIndex } from '~/styles/constant'
 import { Palette } from '~/styles/palette'
 
 export const SelectListContainer = css`
