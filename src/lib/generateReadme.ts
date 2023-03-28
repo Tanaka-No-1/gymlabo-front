@@ -1,6 +1,12 @@
 import { OpenAIStream } from './openaistream'
 import GenerateReadme from '~/interfaces/ai/generateReadme'
 
+/**
+ * ChatGPTにリクエストを送信し、アプリのREADME,mdを生成する関数
+ * @param skill
+ * @param applicationContent
+ * @returns
+ */
 const generateReadme: GenerateReadme = async (skill, applicationContent) => {
   // 配列を空白区切りで文字列に変換
   const l = skill.language.join(' ')
@@ -9,7 +15,16 @@ const generateReadme: GenerateReadme = async (skill, applicationContent) => {
   const s = skill.service.join(' ')
 
   // ChatGPTに送信するプロンプト
-  const content = `私は以下のアプリ実装を考えています。${applicationContent}。${l} ${f} ${d} ${s}の技術で開発する時、アプリ名、アプリ概要(300文字以上)、使用技術(詳細に)を出力してください。`
+  const content = `私は以下のアプリ実装を考えています。${applicationContent}。${l} ${f} ${d} ${s}の技術で開発する時、出力してください。私は以下のアプリケーションの実装を考えています。
+EventPlanner：イベントプランニングアプリ。イベントに必要なタスクをリストアップし、担当者や期限を設定できる。また、進捗状況が一目で分かるダッシュボードもあり。
+Azure,React,Kotlin,PostgreSQLの技術を用いて開発が進められるように1000文字程度のREADMEを生成してください
+
+アプリ名
+アプリ概要(100文字以上)
+使用技術(詳細に)
+シーケンス図(mermaidを用いて)
+使用技術のインストール方法(初心者にも分かりやすく段階を踏んで)
+アプリの使い方`
 
   const payload = {
     model: 'gpt-3.5-turbo',
@@ -29,12 +44,9 @@ const generateReadme: GenerateReadme = async (skill, applicationContent) => {
   const decoder = new TextDecoder()
   let result = ''
   for await (const chunk of stream as any) {
-    const text = decoder.decode(chunk)
-    result += text
-    console.log(text)
+    result += decoder.decode(chunk)
   }
 
-  console.log(result)
   return result
 }
 
