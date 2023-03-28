@@ -15,9 +15,10 @@ const generateReadme: GenerateReadme = async (skill, applicationContent) => {
   const s = skill.service.join(' ')
 
   // ChatGPTに送信するプロンプト
-  const content = `私は以下のアプリ実装を考えています。${applicationContent}。${l} ${f} ${d} ${s}の技術で開発する時、出力してください。私は以下のアプリケーションの実装を考えています。
-EventPlanner：イベントプランニングアプリ。イベントに必要なタスクをリストアップし、担当者や期限を設定できる。また、進捗状況が一目で分かるダッシュボードもあり。
-Azure,React,Kotlin,PostgreSQLの技術を用いて開発が進められるように1000文字程度のREADMEを生成してください
+  const content = `私は以下のアプリ実装を考えています。
+  ${applicationContent}。
+  
+  ${l} ${f} ${d} ${s}の技術を用いて開発が進められるように1000文字程度のREADMEを生成してください
 
 アプリ名
 アプリ概要(100文字以上)
